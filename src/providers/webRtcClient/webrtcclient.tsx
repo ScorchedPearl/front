@@ -138,14 +138,16 @@ export default function PeerProvider({ children }: { children: React.ReactNode }
 
                 return;
             }
-            websocket.send(
-                JSON.stringify({
-                    type: "answer_call",
-                    roomId: activeChat?.id,
-                    userId: currentUser.id,
-                    data: ans,
-                })
-            );
+            if (websocket) {
+                websocket.send(
+                    JSON.stringify({
+                        type: "answer_call",
+                        roomId: activeChat?.id,
+                        userId: currentUser.id,
+                        data: ans,
+                    })
+                );
+            }
         },
         [websocket, activeChat?.id]
     );

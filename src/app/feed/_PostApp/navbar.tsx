@@ -85,9 +85,11 @@ export default function Header() {
                      focus-visible:ring-blue-500/50 rounded-full shadow-md"
                   onChange={(e) => {
                     const query = e.target.value.toLowerCase();
-                    const filteredUsers = users.allUser.filter((u: { name: string; }) =>
-                    u.name.toLowerCase().includes(query)
-                    );
+                    const filteredUsers = users.allUser
+                      ?.filter((u): u is User => u !== null && typeof u?.name === "string")
+                      .filter((u) =>
+                        u.name.toLowerCase().includes(query)
+                      ) ?? [];
                     setFilteredUsers(filteredUsers); 
                   }}
                   />

@@ -158,15 +158,16 @@ export default function AuthForm() {
   const handleLoginGoogle = useCallback(async (cred: TokenResponse) => {
     const googleToken = cred.access_token;
     if (googleToken) {
-      const response: { verifyGoogleToken: string } =
-        await graphqlClient.request(verifyGoogleTokenMutation, {
-          token: googleToken,
-        });
-      const { verifyGoogleToken } = response;
+      const response = await graphqlClient.request(verifyGoogleTokenMutation, {
+        token: googleToken,
+      });
+      const verifyGoogleToken: string | null | undefined = response.verifyGoogleToken;
       console.log(verifyGoogleToken);
       if (verifyGoogleToken) {
         window.localStorage.setItem("__Pearl_Token", verifyGoogleToken);
         redirect("/");
+      } else {
+        alert("Google authentication failed.");
       }
     }
   }, []);

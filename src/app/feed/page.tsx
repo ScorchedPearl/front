@@ -52,7 +52,7 @@ const Index: React.FC = () => {
         initialUserIndex={selectedUserIndex}
         initialStoryIndex={selectedStoryIndex}
         onClose={() => setStoryViewerOpen(false)}
-        stories={stories}
+        stories={(stories ?? []).filter((s): s is NonNullable<typeof s> => s != null)}
       />
       <main className="pt-24 pb-16 px-4 md:px-6 max-w-7xl mx-auto ">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
@@ -75,10 +75,11 @@ const Index: React.FC = () => {
                 <PostSkeleton />
               </>
             ) : (
-              // @ts-ignore
-              posts.map((post, index) => (
-                <PostCard key={post.id} post={post} delay={index} />
-              ))
+              (posts ?? [])
+                .filter((post): post is NonNullable<typeof post> => post != null)
+                .map((post, index) => (
+                  <PostCard key={post.id} post={post} delay={index} />
+                ))
             )}
           </div>
           

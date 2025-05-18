@@ -4,10 +4,10 @@ const config: CodegenConfig = {
   overwrite: true,
   schema: "http://localhost:8000/graphql",
   documents: [
-    "**/*.{ts,tsx}",            // ✅ only scan your actual source files
-    "!**/node_modules/**",          // ✅ exclude node_modules
-    "!**/.next/**",                 // ✅ exclude Next.js build output
-    "!**/*.d.ts",                   // ✅ avoid typing-only files
+    "**/*.{ts,tsx}",           
+    "!**/node_modules/**",         
+    "!**/.next/**",                
+    "!**/*.d.ts",                 
   ],
   generates: {
     "gql/": {

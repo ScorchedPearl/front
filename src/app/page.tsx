@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useCurrentUser } from "@/hooks/user";
 import Loader from "./loading";
+import { User } from "../../gql/graphql";
 function App() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -19,7 +20,7 @@ function App() {
    console.log(user);
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-blue-900 text-white">
-      <Navbar user={user}></Navbar>
+      <Navbar user={user as User}></Navbar>
 
       <div className="flex items-center justify-center h-screen">
         <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">

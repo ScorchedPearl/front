@@ -77,7 +77,7 @@ const StoryViewer: React.FC<StoryViewerProps> = ({
       }
     };
 
-    preloadMedia(mediaUrl);
+    if (mediaUrl) preloadMedia(mediaUrl);
     const nextStoryMedia = getAdjacentStoryMedia(1);
     if (nextStoryMedia) preloadMedia(nextStoryMedia);
     const prevStoryMedia = getAdjacentStoryMedia(-1);
@@ -85,10 +85,11 @@ const StoryViewer: React.FC<StoryViewerProps> = ({
   }, [currentUserIndex, currentStoryIndex]);
   const getAdjacentStoryMedia = (direction: number): string | null => {
     if (direction > 0 && currentStoryIndex + 1 < stories.length) {
-      return stories[currentStoryIndex + 1].videoURL || stories[currentStoryIndex + 1].imageURL;
+      const nextStory = stories[currentStoryIndex + 1];
+      return nextStory.videoURL ?? nextStory.imageURL ?? null;
     } 
     else if (direction < 0 && currentStoryIndex - 1 >= 0) {
-      return stories[currentStoryIndex - 1].videoURL || stories[currentStoryIndex - 1].imageURL;
+      return stories[currentStoryIndex - 1].videoURL ?? stories[currentStoryIndex - 1].imageURL ?? null;
     }
     return null;
   };
@@ -201,7 +202,7 @@ const StoryViewer: React.FC<StoryViewerProps> = ({
           <ChevronRight size={20} />
         </button>
         <div className={`w-full h-full transition-all duration-300 ${animation}`}>
-            {loadedMedia.has(currentStory.videoURL || currentStory.imageURL) ? (
+            {(currentStory.videoURL || currentStory.imageURL) && loadedMedia.has((currentStory.videoURL || currentStory.imageURL) as string) ? (
             currentStory.videoURL ? (
               <video
               ref={mediaRef as React.RefObject<HTMLVideoElement>}
@@ -212,7 +213,7 @@ const StoryViewer: React.FC<StoryViewerProps> = ({
             ) : (
               <img
               ref={mediaRef as React.RefObject<HTMLImageElement>}
-              src={currentStory.imageURL}
+              src={currentStory.imageURL ?? undefined}
               alt={`Story by ${currentStory.author.name}`}
               className="w-full h-full object-contain"
               />

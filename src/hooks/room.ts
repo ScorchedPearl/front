@@ -1,13 +1,13 @@
 import {  useQuery } from "@tanstack/react-query"
-import { GetAllRoomsQuery, GetAllRoomsQueryVariables, GetRoomsByIdQuery, GetRoomsByIdQueryVariables } from "../../gql/graphql";
+import { GetAllRoomsQuery, GetAllRoomsQueryVariables, GetRoomsByIdQuery } from "../../gql/graphql";
 import { graphqlClient } from "@/providers/graphqlClient/index";
 import { getAllRoomsQuery, getRoomsByIdQuery } from "../../graphql/query/room";
 
 export const useGetRooms = () => {
  const query = useQuery<GetAllRoomsQuery,GetAllRoomsQueryVariables>({
   queryKey: ["all-Rooms"],
-  queryFn: async () => {
-    const data = await graphqlClient.request(getAllRoomsQuery as any);
+  queryFn: async (): Promise<GetAllRoomsQuery> => {
+    const data = await graphqlClient.request<GetAllRoomsQuery>(getAllRoomsQuery as any);
     return data;
   }
  });
@@ -15,10 +15,10 @@ export const useGetRooms = () => {
 }
 
 export const useGetRoomsById = () => {
-  const query = useQuery<GetRoomsByIdQuery,GetRoomsByIdQueryVariables>({
+  const query = useQuery<GetRoomsByIdQuery, unknown, GetRoomsByIdQuery, ["all-Rooms"]>({
     queryKey: ["all-Rooms"],
-    queryFn: async () => {
-      const data = await graphqlClient.request(getRoomsByIdQuery as any);
+    queryFn: async (): Promise<GetRoomsByIdQuery> => {
+      const data = await graphqlClient.request<GetRoomsByIdQuery>(getRoomsByIdQuery as any);
       return data;
     }
   });
