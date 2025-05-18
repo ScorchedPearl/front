@@ -1,7 +1,7 @@
 import React from "react";
 import { AboutCard } from "./_components/aboutCard";
 import { Rocket,ArrowBigRightIcon,LucideWebcam,LucideVibrate } from "lucide-react";
-import { Card1Description, Card1Title } from "./_components/card1";
+import { Card1Description, Card1Title,Card2Title,Card2Description,Card3Description,Card3Title }from "./_components/card1";
 interface aboutCards{
  colour:string;
  direction:"left"|"right";
@@ -26,14 +26,20 @@ description: <Card1Description/>,
  {
 colour: "#EF476E",
 direction: "right",
-title: "Hello2",
+title: <Card2Title  />,
 Icon: <ArrowBigRightIcon className="w-5 h-5" />,
+description: <Card2Description/>,
+image:"chat.png",
+imageAlt:"PearlPost",
  },
  {
 colour: "#23C55D",
 direction: "left",
-title: "Hello",
+title: <Card3Title/>,
 Icon: <LucideWebcam className="w-5 h-5" />,
+description: <Card3Description/>,
+image:"ai.png",
+imageAlt:"PearlPost",
  },
  {
 colour: "#EFC23B",

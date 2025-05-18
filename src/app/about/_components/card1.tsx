@@ -41,3 +41,79 @@ export function Card1Description(){
   </div>
  )
 }
+
+export function Card2Title() {
+  return (
+    <div>
+      <h1 className="text-4xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center mt-6 relative z-20 pt-6 bg-clip-text text-transparent bg-gradient-to-b from-blue-800 via-blue-700 to-blue-700 dark:from-blue-800 dark:via-white dark:to-white">
+        Effortless <Cover>Collaboration</Cover> <br />
+      </h1>
+    </div>
+  );
+}
+
+const content2 = [
+  {
+    title: "Real-Time WebSocket Connection",
+    description:
+      "Experience instant connectivity and communication with real-time WebSocket integration.",
+  },
+  {
+    title: "Real-Time Dashboard Updates",
+    description:
+      "See changes reflected immediately on your dashboard for a truly dynamic workflow.",
+  },
+  {
+    title: "Real-Time Workspace",
+    description:
+      "Collaborate live with your team in a synchronized, always-updated workspace.",
+  },
+];
+
+export function Card2Description() {
+  return (
+    <div className="w-full h-fit relative bottom-5">
+      <StickyScroll content={content2} />
+    </div>
+  );
+
+}
+
+
+
+export function Card3Title() {
+  return (
+    <div>
+      <h1 className="text-4xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center mt-6 relative z-20 pt-6 bg-clip-text text-transparent bg-gradient-to-b from-purple-800 via-purple-700 to-purple-700 dark:from-purple-800 dark:via-white dark:to-white">
+        AI-Powered <Cover>Enhancements</Cover>
+      </h1>
+    </div>
+  );
+}
+
+const content3 = [
+  {
+    title: "AI Integration",
+    description:
+      "Leverage advanced AI tools to streamline your workflow and unlock new creative possibilities.",
+  },
+  {
+    title: "Personalized Chat Bot",
+    description:
+      "Get instant support and tailored recommendations with your own intelligent chat assistant.",
+  },
+  {
+    title: "Enhanced Post Features",
+    description:
+      "Boost your content with AI-driven suggestions, smart formatting, and automated enhancements.",
+  },
+];
+
+export function Card3Description() {
+  return (
+    <div className="w-full h-fit relative bottom-5">
+      <StickyScroll content={content3} />
+    </div>
+  );
+}
+
