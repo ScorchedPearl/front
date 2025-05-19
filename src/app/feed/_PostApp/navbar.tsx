@@ -121,13 +121,85 @@ export default function Header() {
             <UserAvatar src={user?.profileImageURL??""} name={user?.name??""} size="sm" />
             
             {isMobile && (
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </Button>
+                <div className="relative">
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                >
+                  {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </Button>
+                {mobileMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-64 bg-[#0a0f1c] border border-blue-500/30 rounded-lg shadow-lg z-50 p-4">
+                    <div className="mb-4">
+                      <div className="relative group">
+                        <Search className="absolute left-3 top-2.5 h-4 w-4 text-blue-400 transition-all group-hover:text-blue-300" />
+                        <Input
+                          placeholder="Search users..."
+                          className="w-full bg-[#131b2e]/50 border border-blue-500/30 
+                            focus:w-full transition-all duration-300 pl-9 
+                            text-white placeholder-blue-200/50 focus-visible:ring-2 
+                            focus-visible:ring-blue-500/50 rounded-full shadow-md"
+                          onChange={(e) => {
+                            const query = e.target.value.toLowerCase();
+                            const filteredUsers = users.allUser
+                              ?.filter((u): u is User => u !== null && typeof u?.name === "string")
+                              .filter((u) => u.name.toLowerCase().includes(query)) ?? [];
+                            setFilteredUsers(filteredUsers);
+                          }}
+                        />
+                        {filteredUsers.length > 0 && (
+                          <div className="absolute top-12 left-0 w-full bg-[#0a0f1c] border border-blue-500/30 rounded-lg shadow-lg z-10">
+                            {filteredUsers.map((user, index) => (
+                              <div
+                                key={index}
+                                className="px-4 py-2 hover:bg-blue-500/10 cursor-pointer text-white"
+                                onClick={() => {
+                                  console.log(`Selected user: ${user.name}`);
+                                }}
+                              >
+                                <div className="flex items-stretch space-x-2 justify-between">
+                                  <div className="flex items-center space-x-2">
+                                    <UserAvatar src={user.profileImageURL ?? ""} name={user.name ?? ""} className="border-2 border-white" />
+                                    {user.name}
+                                  </div>
+                                  <Button
+                                    className="bg-yellow-300 rounded-full border-2 border-white"
+                                    onClick={() => handleMsg(user)}
+                                  >
+                                    <MessageSquare className="text-white" />
+                                  </Button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <nav className="flex flex-col space-y-2">
+                      <NavItem
+                        icon={<Home className="h-6 w-6 ml-6" />}
+                        label={<span className="ml-6 text-left">Home</span>}
+                        path="/"
+                        active={pathname === "/"}
+                      />
+                      <NavItem
+                        icon={<Briefcase className="h-6 w-6" />}
+                        label={<span className="ml-2 text-left">Dashboard</span>}
+                        path="/dashboard"
+                        active={pathname === "/dashboard"}
+                      />
+                      <NavItem
+                        icon={<MessageSquare className="h-6 w-6" />}
+                        label={<span className="ml-2 text-left">Messenger</span>}
+                        path="/messenger"
+                        active={pathname === "/messenger"}
+                      />
+                    </nav>
+                  </div>
+                )}
+                   
+                </div>
             )}
           </div>
         </div>
@@ -139,7 +211,7 @@ export default function Header() {
           <div className="flex justify-around py-3">
             <NavItem icon={<Home className="h-6 w-6" />} label="Home" path="/" active={pathname === "/"} />
             <NavItem icon={<Briefcase className="h-6 w-6" />} label="Dashboard" path="/dashboard" active={pathname === "/dashboard"} />
-            <NavItem icon={<MessageSquare className="h-6 w-6" />} label="Messanger" path="/messanger" active={pathname === "/messanger"} />
+            <NavItem icon={<MessageSquare className="h-6 w-6" />} label="Messanger" path="/messanger" active={pathname === "/messenger"} />
           </div>
         </nav>
       )}
@@ -149,7 +221,7 @@ export default function Header() {
 
 interface NavItemProps {
   icon: React.ReactNode;
-  label: string;
+  label: React.ReactNode;
   path: string;
   active?: boolean;
 }

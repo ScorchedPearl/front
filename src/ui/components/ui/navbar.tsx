@@ -98,7 +98,7 @@ export default function Navbar(props: { user: User }) {
                 SignOut
               </button>
               </div>
-}
+        }
             
           </div>
           <button
@@ -124,7 +124,11 @@ export default function Navbar(props: { user: User }) {
               {features.map((feature) => (
                 <a
                   key={feature.name}
-                  onClick={()=>router.push(feature.href)}
+                  onClick={()=>{
+                     if (props.user) {
+                    router.push(feature.href);
+                    }
+                  }}
                   className="block px-2 py-2 text-white/80 hover:text-cyan-400 transition-colors"
                 >
                   <div className="flex items-center">
@@ -134,7 +138,7 @@ export default function Navbar(props: { user: User }) {
                 </a>
               ))}
             </div>
-            <a href="#" className="block px-2 py-2 text-white/80 hover:text-cyan-400 transition-colors">
+            <a href="/about" className="block px-2 py-2 text-white/80 hover:text-cyan-400 transition-colors">
               About
             </a>
           </div>

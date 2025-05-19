@@ -117,3 +117,39 @@ export function Card3Description() {
   );
 }
 
+export function Card4Title() {
+  return (
+    <div>
+      <h1 className="text-4xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center mt-6 relative z-20 pt-6 bg-clip-text text-transparent bg-gradient-to-b from-green-800 via-green-700 to-green-700 dark:from-green-800 dark:via-white dark:to-white">
+        Secure & <Cover>Reliable</Cover>
+      </h1>
+    </div>
+  );
+}
+
+const content4 = [
+  {
+    title: "End-to-End Encryption",
+    description:
+      "Protect your data and conversations with robust end-to-end encryption.",
+  },
+  {
+    title: "99.99% Uptime",
+    description:
+      "Rely on a platform built for stability and performance, ensuring your work is always accessible.",
+  },
+  {
+    title: "Granular Access Control",
+    description:
+      "Manage permissions and roles with fine-grained access control for your team.",
+  },
+];
+
+export function Card4Description() {
+  return (
+    <div className="w-full h-fit relative bottom-5">
+      <StickyScroll content={content4} />
+    </div>
+  );
+}
+
