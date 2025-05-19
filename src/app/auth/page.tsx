@@ -54,13 +54,11 @@ export default function AuthForm() {
     });
   }
   const onSubmit = async (data: any) => {
-    console.log("Form Data:", data);
     if(isForgotPassword){
       const payload = {
         email: data.email,
         password: data.password,
       };
-      console.log(payload);
       setIsOtpPage(true);
       const otp = generateOTP();
       const sended = await graphqlClient.request(sendOtpEmailQuery, {
@@ -70,18 +68,15 @@ export default function AuthForm() {
       if (!sended) {
         return alert("Error sending OTP");
       }
-      console.log(otp);
       localStorage.setItem("currentOtp", otp);
       await waitForOtpVerification();
       try{
       localStorage.removeItem("currentOtp");
-      console.log("Changing Password");
       const changePasswordPayload={
         email:data.email,
         newPassword:data.password
       }
       await graphqlClient.request(changePasswordMutation,changePasswordPayload);
-      console.log("Password Changed");
       const token = await graphqlClient.request<TokendiffResponse>(
         verifyCredentialsTokenQuery,
         payload
@@ -102,7 +97,6 @@ export default function AuthForm() {
         email: data.email,
         password: data.password,
       };
-      console.log(payload);
       if (data.password !== data.confirmPassword) {
         return setError("confirmPassword", {
           type: "manual",
@@ -134,7 +128,6 @@ export default function AuthForm() {
         email: data.email,
         password: data.password,
       };
-      console.log(payload);
       const token = await graphqlClient.request<TokendiffResponse>(
         verifyCredentialsTokenQuery,
         payload
@@ -149,7 +142,6 @@ export default function AuthForm() {
   };
   const googlelogin = useGoogleLogin({
     onSuccess: (cred: TokenResponse) => {
-      console.log(cred);
       handleLoginGoogle(cred);
     },
     onError: () => console.log("Login Failed"),
@@ -162,7 +154,6 @@ export default function AuthForm() {
         token: googleToken,
       });
       const verifyGoogleToken: string | null | undefined = response.verifyGoogleToken;
-      console.log(verifyGoogleToken);
       if (verifyGoogleToken) {
         window.localStorage.setItem("__Pearl_Token", verifyGoogleToken);
         redirect("/");

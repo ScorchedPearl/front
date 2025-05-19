@@ -37,7 +37,6 @@ const Index: React.FC = () => {
   useEffect(() => {
     if (!isLoading2 && !isLoading) {
       setIsLoading(false);
-      console.log(posts);
     }
   }, [isLoading2, isLoading, posts]);
   if(isLoading4||isLoading||isLoad){

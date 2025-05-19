@@ -109,7 +109,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
       return message
     });
     
-    console.log("Updated messages:", updatedMessages);
+  
     const updatedChat = {
       ...prevChat,
       messages: updatedMessages,
@@ -131,9 +131,9 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
      }));
    }
 
-   console.log("Reaction added:",activeChatId, id, emoji);
+
     
-   console.log("Updated chat:", activeChat);
+  
  }
  const onShare=()=>{
 
@@ -162,7 +162,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
           imageURL: "",
         }));
       }
-      console.log("Sending message:", newMessage);
+  
       setActiveChat((prevChat) => {
         if (!prevChat) return prevChat;
         const updatedChat = {

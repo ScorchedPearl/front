@@ -78,9 +78,9 @@ export const Sidebar = () => {
                 activeChat?.id === chat.id && "bg-accent text-accent-foreground hover:bg-accent"
               )}
               onClick={() => {
-               console.log(activeChat)
+          
                setActiveChat(chat)
-              console.log(activeChat)
+
              }}
             >
               <UserAvatar

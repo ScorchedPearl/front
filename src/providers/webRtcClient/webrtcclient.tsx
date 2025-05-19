@@ -118,7 +118,7 @@ export default function PeerProvider({ children }: { children: React.ReactNode }
                 video: true,
             });
             setMyStream(stream);
-            console.log(`Incoming Call`, from, offer);
+       
             setParticipants([
                 {
                     id: from,
@@ -162,7 +162,7 @@ export default function PeerProvider({ children }: { children: React.ReactNode }
     const handleCallAccepted = useCallback(
         ({  ans }: {  ans: RTCSessionDescriptionInit }) => {
             peerService.setLocalDescription(ans);
-            console.log("Call Accepted!");
+
             sendStreams();
         },
         [sendStreams]
@@ -196,7 +196,7 @@ export default function PeerProvider({ children }: { children: React.ReactNode }
         if (peerService.peer) {
             peerService.peer.addEventListener("track", async ev => {
                 const remoteStream = ev.streams;
-                console.log("GOT TRACKS!!");
+               
                 setRemoteStream(remoteStream[0]);
             });
         }
@@ -207,13 +207,13 @@ export default function PeerProvider({ children }: { children: React.ReactNode }
         if(websocket){
         websocket.onmessage=(message)=>{
             const data = JSON.parse(message.data);
-            console.log("WebSocket message received:", data);
+           
             if (data.type === "incoming_call") {
                 const payload={
                     from: data.userId,
                     offer: data.data,
                 }
-                console.log("Incoming call payload", payload);
+   
                 handleIncommingCall(payload);
             }
             if (data.type === "call_answered") {

@@ -18,7 +18,6 @@ const Stories: React.FC<StoriesProps> = ({ openStoryViewer,stories }) => {
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
  
-  console.log(stories);
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget;

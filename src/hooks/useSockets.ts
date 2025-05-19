@@ -16,7 +16,6 @@ export function useSocket(roomId: string) {
 
     const connectSocket = () => {
       ws = new WebSocket(WS_URL);
-      console.log("roomId", roomId);
 
       ws.onopen = () => {
         setLoading(false);

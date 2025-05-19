@@ -17,7 +17,6 @@ function App() {
 
   const {user,isLoading}=useCurrentUser();
    if(isLoading) return <Loader></Loader>;
-   console.log(user);
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-blue-900 text-white">
       <Navbar user={user as User}></Navbar>
